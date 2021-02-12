@@ -1,6 +1,6 @@
 ---
 id: cli-getting-started
-title: Gettings started
+title: Getting started
 sidebar_label: Gettings started
 slug: /cli/guide/getting-started
 ---
@@ -13,7 +13,9 @@ You can create as many _worfklows_ as you'd like, and you put them in a `./capte
 
 A workflow in Capter consists of one or more of requests, and then assertions on the responses of those requests. Below is a mimimal workflow that checks if the `/health` endpoint of our API returns `200`:
 
-```yml title="./capter/health.yml"
+```yml
+# ./capter/health.yml
+
 name: health check
 steps:
   - name: check /health
@@ -32,7 +34,7 @@ capter test
 
 You should see something like this:
 
-![Demo](../../..//src/assets/demos/getting-started.gif)
+![Demo](../../../src/assets/demos/getting-started.gif)
 
 ## Where to go from here?
 

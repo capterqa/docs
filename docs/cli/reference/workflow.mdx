@@ -11,7 +11,9 @@ The workflow files should be located under `.capter/` in your projects root fold
 
 ## Example workflow
 
-```yml title="./capter/product-crud.yml"
+```yml
+# ./capter/product-crud.yml
+
 name: product crud
 env:
   product_name: M1 MacBook Air
@@ -129,7 +131,9 @@ If you send tokens for authorization for all steps in a workflow, it might make 
 
 #### Example JWT login flow
 
-```yml title="./capter/login.yml"
+```yml
+# ./capter/login.yml
+
 name: login
 steps:
   - name: login

@@ -82,12 +82,6 @@
   --ifm-h3-font-size: 1.3rem;
 }
 
-.codeBlockTitle_node_modules-\@docusaurus-theme-classic-lib-next-theme-CodeBlock- {
-  color: rgba(255, 255, 255, 0.4) !important;
-  font-weight: 500 !important;
-  border-color: rgba(255, 255, 255, 0.1) !important;
-}
-
 .docusaurus-highlight-code-line {
   background-color: rgba(255, 255, 255, 0.1);
   display: block;

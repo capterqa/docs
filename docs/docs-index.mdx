@@ -15,38 +15,29 @@ Capter is a lightweight end-to-end testing tool for APIs. It's language agnostic
 
 ### Workflows
 
-Create your workflows in a folder called `.capter/`. These are YAML files containing instructions on how what the tests should test.
+Capter workflows are YAML files where you write your tests:
 
-```yaml
-# .capter/products.yml
+```yml
+# ./capter/health.yml
 
-name: products
+name: health check
 steps:
-  - name: fetch all products
-    id: products
-    url: ${{ env.URL }}/api/products
+  - name: check /health
+    url: https://fake-api.capter.io/api/health
     assertions:
       - !assert status equal 200
-      - !assert body isArray
-
-  - name: fetch first product
-    url: ${{ env.URL }}/api/posts/${{ products.response.body.0.id }}
-    assertions:
-      - !assert body.id equal ${{ products.response.body.0.id }}
 ```
 
-As you can see in the example above, we're passing `${{ env.URL }}` and `${{ products.response.body.0.id }}`. The workflows are compiled run time and those will be replace with actual values.
-
-`env.URL` will be replaced by the environment variable we pass when running the CLI, and `products.response.body.0.id` will be replaced by a value in the response from the first request.
+The example above is very small and doesn't do much. Have a look at the [get started guide](/cli/guide/getting-started) to learn how to add more steps, assertions and how to compose advanced requests.
 
 ### The Capter CLI
 
 When you run the CLI, it will look for workflows in the `.capter/` folder and run them sequentially.
 
 ```sh
-$ URL=http://localhost:3000 capter test
+$ capter test
 ```
 
-### Demo
+## Demo
 
-![CLI](/img/demo.gif)
+![Demo](../src/assets/demos/getting-started.gif)
