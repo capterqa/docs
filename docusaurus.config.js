@@ -57,8 +57,18 @@ module.exports = {
       },
       items: [
         {
-          href: 'https://github.com/capterqa/cli',
-          label: 'GitHub',
+          to: '/cli/guide/installation',
+          label: 'Getting started',
+          position: 'left',
+        },
+        {
+          to: '/cli/reference/workflow',
+          label: 'Workflow reference',
+          position: 'right',
+        },
+        {
+          to: '/cli/reference/assertions',
+          label: 'Assertions reference',
           position: 'right',
         },
       ],

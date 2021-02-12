@@ -5,4 +5,44 @@ sidebar_label: CLI
 slug: /cli/reference/cli
 ---
 
-Nothing here yet... 🤠
+## Overview
+
+This document describes the Capter CLI commands, arguments, and options.
+
+Calling `capter` will show you information about subcommands, but has no functionality itself.
+
+```console
+USAGE:
+    capter <SUBCOMMAND>
+
+FLAGS:
+    -h, --help       Prints help information
+    -V, --version    Prints version information
+
+SUBCOMMANDS:
+    help    Prints this message or the help of the given subcommand(s)
+    test    run tests
+```
+
+You can add `--help` to any command to see the available options and arguments.
+
+## Commands
+
+### `test`
+
+Running `capter test` will run any available workflow that the CLI can find in your project.
+
+#### Options
+
+| Option          | description                                                                                                                                                                                                                                                       |
+| :-------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--token`, `-t` | If you are using the capter.io service, pass in your project token. This will automatically send the run report to Capter. If you post to a custom webhook, this token will be passed in the query like `?token={token}` so you can use it to authorize the call. |
+| `--webhook`     | The CLI will make a POST request with the run report to this URL. If you pass in a `--token` but no webhook, it will use the capter.io webhook.                                                                                                                   |
+
+#### Flags
+
+| Flag            | description                                                                                      |
+| :-------------- | :----------------------------------------------------------------------------------------------- |
+| `--debug`, `-d` | Run the CLI in debug mode.                                                                       |
+| `--dry-run`     | Stops the CLI from posting to the webhook, even if it's set.                                     |
+| `--skip-git`    | Stops the CLI from sending the **sha**, **commit message** , and **branch name** to the webhook. |
