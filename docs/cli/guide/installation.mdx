@@ -1,0 +1,33 @@
+---
+id: cli-installation
+title: Installation
+sidebar_label: Installation
+slug: /cli/guide/installation
+---
+
+:::note
+
+You can currently only install Capter [manually](#manual-installation) or through [Cargo](#cargo). More ways are coming soon!
+
+:::
+
+### Manual installation
+
+1. Go to [GitHub Releases](https://github.com/capterqa/cli/releases) on the Capter CLI repo
+2. Expand _Assets_ on a release and download the binary for your OS
+3. Rename the download to `capter`
+4. Add the location of `capter` to your `PATH`:
+
+```bash
+export PATH=$PATH:/capter/bin/location
+```
+
+> You might have to run `chmod +x capter` to get the correct permssions to run it.
+
+### Cargo
+
+```sh
+cargo install capter --vers [VERSION]
+```
+
+Head over to [crates.io](https://crates.io/crates/capter) and check for the latest version number.

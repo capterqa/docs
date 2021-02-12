@@ -1,0 +1,101 @@
+/* stylelint-disable docusaurus/copyright-header */
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #3f51b5;
+  --ifm-color-primary-dark: #3949ab;
+  --ifm-color-primary-darker: #303f9f;
+  --ifm-color-primary-darkest: #283593;
+  --ifm-color-primary-light: #5c6bc0;
+  --ifm-color-primary-lighter: #7986cb;
+  --ifm-color-primary-lightest: #9fa8da;
+  --ifm-code-font-size: 95%;
+
+  --custom-color-blue-100: #bbdefb;
+  --custom-color-blue-200: #90caf9;
+  --custom-color-blue-300: #64b5f6;
+  --custom-color-blue-400: #42a5f5;
+  --custom-color-blue-500: #2196f3;
+  --custom-color-blue-600: #1e88e5;
+  --custom-color-blue-700: #1976d2;
+  --custom-color-blue-800: #1565c0;
+  --custom-color-blue-900: #0d47a1;
+
+  --custom-color-green-100: #c8e6c9;
+  --custom-color-green-200: #a5d6a7;
+  --custom-color-green-300: #81c784;
+  --custom-color-green-400: #66bb6a;
+  --custom-color-green-500: #4caf50;
+  --custom-color-green-600: #43a047;
+  --custom-color-green-700: #388e3c;
+  --custom-color-green-800: #2e7d32;
+  --custom-color-green-900: #1b5e20;
+
+  --ifm-color-info-darker: var(--custom-color-blue-700);
+  --ifm-color-info-dark: var(--custom-color-blue-600);
+  --ifm-color-info: var(--custom-color-blue-500);
+
+  --ifm-color-success-darker: var(--custom-color-green-700);
+  --ifm-color-success-dark: var(--custom-color-green-600);
+  --ifm-color-success: var(--custom-color-green-500);
+
+  --ifm-color-success-darker: var(--custom-color-green-700);
+  --ifm-color-success-dark: var(--custom-color-green-600);
+  --ifm-color-success: var(--custom-color-green-500);
+
+  --ifm-font-size-base: 16px;
+  --ifm-h3-font-size: 1rem;
+}
+
+:root[data-theme='light'] {
+  --ifm-font-color-base: #212121;
+}
+
+:root[data-theme='dark'] {
+  --ifm-color-primary: #7986cb;
+  --ifm-color-primary-dark: #3949ab;
+  --ifm-color-primary-darker: #303f9f;
+}
+
+.menu__list {
+  font-size: 0.9rem;
+}
+
+.navbar-sidebar__items .menu .menu__link {
+  display: block;
+}
+
+.navbar__logo {
+  height: 20px;
+}
+
+.markdown p img {
+  border-radius: var(--ifm-global-radius);
+}
+
+.markdown h3 {
+  --ifm-h3-font-size: 1.3rem;
+}
+
+.codeBlockTitle_node_modules-\@docusaurus-theme-classic-lib-next-theme-CodeBlock- {
+  color: rgba(255, 255, 255, 0.4) !important;
+  font-weight: 500 !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.docusaurus-highlight-code-line {
+  background-color: rgba(255, 255, 255, 0.1);
+  display: block;
+  margin: 0 calc(-1 * var(--ifm-pre-padding));
+  padding: 0 var(--ifm-pre-padding);
+}
+
+.alert--success {
+  --ifm-alert-background-color: var(--ifm-color-primary);
+  --ifm-alert-border-color: var(--ifm-color-primary);
+}

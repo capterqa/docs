@@ -1,0 +1,39 @@
+---
+id: cli-getting-started
+title: Gettings started
+sidebar_label: Gettings started
+slug: /cli/guide/getting-started
+---
+
+After [installing the Capter CLI](/cli/installation) it's time to create your first _workflow_. You write your workflows in **YAML**, which should be a familiar language if you have used something like GitHub Actions or Travis CI before.
+
+You can create as many _worfklows_ as you'd like, and you put them in a `./capter` folder at the root of your project.
+
+### 1. Create a workflow
+
+A workflow in Capter consists of one or more of requests, and then assertions on the responses of those requests. Below is a mimimal workflow that checks if the `/health` endpoint of our API returns `200`:
+
+```yml title="./capter/health.yml"
+name: health check
+steps:
+  - name: check /health
+    url: https://fake-api.capter.io/api/health
+    assertions:
+      - !assert status equal 200
+```
+
+### 2. Run the CLI
+
+The next step is to run the CLI. Depending on how you installed Capter, the way to run it might differ – but for the most part you can just run the `capter test` command:
+
+```sh
+capter test
+```
+
+You should see something like this:
+
+![Demo](../../..//src/assets/demos/getting-started.gif)
+
+## Where to go from here?
+
+Just checking the health endpoint is probably not why you're looking in to Capter – there are a lot of other tools that can do that! The next step is to learn how to [compose requests](/cli/composing-requests), or if you want to see Capter in action you can head over to the [examples](/docs/cli/examples).

@@ -1,0 +1,178 @@
+---
+id: workflow-reference
+title: Workflow reference
+sidebar_label: Workflow
+slug: /cli/reference/workflow
+---
+
+The Capter workflows are written in YAML. If you don't know YAML, check out [Learn YAML in five minutes](https://www.codeproject.com/Articles/1214409/Learn-YAML-in-five-minutes).
+
+The workflow files should be located under `.capter/` in your projects root folder.
+
+## Example workflow
+
+```yml title="./capter/product-crud.yml"
+name: product crud
+env:
+  product_name: M1 MacBook Air
+headers:
+  Authorization: bearer ${{ mask env.JWT }}
+steps:
+  - name: create product
+    id: create
+    url: ${{ env.URL }}/products
+    method: POST
+    body:
+      name: ${{ env.product_name }}
+    assertions:
+      - !assert status equal 201
+      - !assert body.name equal ${{ env.product_name }}
+
+  - name: fetch product
+    url: ${{ env.URL }}/products/${{ create.response.body.id }}
+    assertions:
+      - !assert status equal 200
+      - !assert body.name equal ${{ env.product_name }}
+```
+
+## Root
+
+### `name`
+
+This is the name of the workflow and will be displayed in the CLI output.
+
+### `url`
+
+You can set the URL at the root level or per step. The root level URL will be used as the default, but the step one takes precedence.
+
+### `method`
+
+You can set the method at the root level or per step. The root level method will be used as the default, but the step one takes precedence.
+
+### `headers`
+
+Add headers to _every request_. These will merge with any headers defined in the step. This is a good place to put something like content type or authorization.
+
+```yml
+headers:
+  Content-type: application/json
+  Authorization: bearer ${{ env.JWT }}
+```
+
+### `skip`
+
+Skips the workflow and all its steps.
+
+### `env`
+
+Passing an object here will make it available together with the rest of the environment variables using a template tag:
+
+```yml
+env:
+  foo: bar
+steps:
+  query:
+    foo: ${{ env.foo }} # -> bar
+```
+
+### `steps`
+
+A step is basically a configuration for an HTTP request that the CLI will make when you run it. Each workflow needs to include one or more steps for it do actually do anything. See the [step reference](#step) below. You pass the steps as a YAML array:
+
+```yml
+steps:
+  - name: step 1
+    url: ${{ env.URL }}/products
+
+  - name: step 2
+    url: ${{ env.URL }}/product/1
+```
+
+## Step
+
+### `name`
+
+This is the name of the step and will be displayed in the CLI output.
+
+### `url`
+
+Where to make the request.
+
+### `method`
+
+The method used when making the request.
+
+Defaults to `GET`.
+
+### `query`
+
+Adds a query to the url:
+
+```yml
+url: https://fake-api.capter.io/products
+query:
+  id: 1
+```
+
+The above will generate `https://fake-api.capter.io/products?id=1`.
+
+### `headers`
+
+Add headers to the request:
+
+```yml
+headers:
+  Content-Type: application/json
+```
+
+If you send tokens for authorization for all steps in a workflow, it might make sense to put it at the [root level](#headers) instead.
+
+#### Example JWT login flow
+
+```yml title="./capter/login.yml"
+name: login
+steps:
+  - name: login
+    id: login
+    url: ${{ env.url }}/login
+    method: POST
+    body:
+      email: ${{ env.email }}
+      password: ${{ env.password }}
+
+  - name: fetch logged in user
+    url: ${{ env.url }}/me
+    headers:
+      # use token from login response
+      Authorization: bearer ${{ login.response.token }}
+    assertions:
+      - !assert body.email equal ${{ env.email }}
+```
+
+### `body`
+
+Add a body to the request:
+
+```yml
+- name: create product
+  body:
+    product_name: M1 MacBook Air
+    price: 999
+```
+
+### `skip`
+
+Skips the step.
+
+### `assertions`
+
+A list of assertions that will run after the request gets a response:
+
+```yml
+assertions:
+  - !assert status equals 200
+  - !assert duration isBelow 4000
+  - !assert body.email is filip@capter.io
+```
+
+See the [Aassertion reference page](/cli/reference/assertions).

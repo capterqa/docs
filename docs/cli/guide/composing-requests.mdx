@@ -1,0 +1,103 @@
+---
+id: cli-composing-requests
+title: Composing requests
+sidebar_label: Composing requests
+slug: /cli/guide/composing-requests
+---
+
+When testing APIs, static requests only takes you so far. Luckily, Capter provides a powerful _templating engine_ that lets you to compose your requests from variables you pass in, or from the responses of previous requests. For example, you can:
+
+- Pass in the URL as an environment variable – and use the tests both to test locally/CI **and** monitor your live environment using a cron job
+- Pick the `id` of a resource in a response and use it to compose a URL for the next request
+
+## Using template tags
+
+Capter provides its own _templating engine_, similar to [Mustache](http://mustache.github.io/) or [Handlebars](https://handlebarsjs.com/):
+
+```yml title=".capter/products.yml" {5,7,13,15}
+name: products
+steps:
+  - name: fetch all products
+    # adding an id to a step makes its response available for later steps
+    id: products
+    # grab the base URL from an environment variable
+    url: ${{ env.URL }}/api/products
+    assertions:
+      - !assert status equal 200
+      - !assert body isArray
+
+  - name: fetch first product
+    url: ${{ env.URL }}/api/posts/${{ products.response.body.0.id }}
+    assertions:
+      - !assert body.id equal ${{ products.response.body.0.id }}
+```
+
+### Environment variables
+
+First, we use `${{ env.URL }}`:
+
+```yml
+url: ${{ env.URL }}/api/products
+```
+
+Before this step runs, all template tags will be compiled and replaced with real values. In this case, `env.URL` will be replaced with whatever is in the `URL` environment variable. We will pass this one in when calling the CLI.
+
+:::tip Using variables from the system
+
+Capter automatically pulls in all environment variables available and puts them in the `env` scope. If you run the CLI in GitHub actions for example, you have access to [all variables they give you](https://docs.github.com/en/actions/reference/environment-variables).
+
+:::
+
+### Using values from a response
+
+In the next step, we use `${{ products.response.body.0.id }}` when configuring the URL:
+
+```yml
+url: ${{ env.URL }}/api/posts/${{ products.response.body.0.id }}
+```
+
+By adding a `id: products` to the first step, we now have access to its response under the `products` scope.
+
+`products.response.body.0.id` it the path to the `id` of the resource we want to fetch is in this step, and we use it both in the URL and then later in the assertion – making sure that fetching the resource `/api/posts/{id}` actually returns the correct resource:
+
+```yml
+- !assert body.id equal ${{ products.response.body.0.id }}
+```
+
+## Available variables
+
+### Environment variables
+
+Environment variables lives under the `env` scope:
+
+```yml
+${{ env.MY_VARIABLE }}
+```
+
+### Request/response variables
+
+By adding an `id` to a step, you will have access to its _request_ and _response_ in later steps.
+
+#### Request variables
+
+Request variables are found under `${{ my-id.request.x }}`.
+
+| Scope             | Type                 | Description          |
+| :---------------- | :------------------- | :------------------- |
+| `request.body`    | `any`                | The request body.    |
+| `request.headers` | `{ string: string }` | The request headers. |
+| `request.method`  | `string`             | The request method.  |
+| `request.name`    | `string`             | The request name.    |
+| `request.url`     | `string`             | The request URL.     |
+| `request.query`   | `{ string: string }` | The request query.   |
+
+#### Response variables
+
+Request variables are found under `${{ my-id.response.x }}`.
+
+| Scope                  | Type                 | Description               |
+| :--------------------- | :------------------- | :------------------------ |
+| `response.body`        | `any`                | The response body.        |
+| `response.headers`     | `{ string: string }` | The response headers.     |
+| `response.status`      | `number`             | The response status.      |
+| `response.status_text` | `string`             | The response status text. |

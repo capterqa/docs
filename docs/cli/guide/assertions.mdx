@@ -1,0 +1,78 @@
+---
+id: cli-assertions
+title: Assertions
+sidebar_label: Assertions
+slug: /cli/guide/assertions
+---
+
+To make sure that you API is working correctly, you probably want to add some assertions to your workflows – and Capter makes that super easy!
+
+You write the assertions in _plain English_, and Capter parses them in to actual assertions.
+
+## Asserting on a response
+
+You add assertion at the end of each _step_:
+
+```yml title=".capter/products.yml" {5-7}
+name: products
+steps:
+  - name: fetch all products
+    url: https://fake-api.capter.io/api/products
+    assertions:
+      - !assert status equal 200
+      - !assert body isArray
+```
+
+In the above example we assert that the status equals 200 and that the body we get back is an array.
+
+### What you can assert on
+
+There are four things you can assert on:
+
+- `status` - the HTTP status you get back
+- `body` - the response body
+- `headers` - the response headers
+- `duration` - how long it took to get a response back
+
+### Testing the opposite using the `!!` operator
+
+You can invert a test by adding an extra `!` at the start of the assertion string:
+
+```yml
+- !!assert status equal 500
+```
+
+The above test **will fail** if the status equals 500. This is equal to the `.not` extension you see in many other test frameworks.
+
+## Composing an assertion
+
+Sometimes you want to assert that a response matches something in a previous response, for example:
+
+- Create a product
+  - Assert that we get a product with an `id` back
+- Use the `id` from the create response to fetch the product
+  - Assert that the `id` of that user matches the `id` in the create step
+
+In a Capter workflow, that would look something like this:
+
+```yml title="./capter/product-crud.yml" {13}
+name: product crud
+steps:
+  - name: create product
+    id: create
+    url: https://fake-api.capter.io/products
+    method: POST
+    assertions:
+      - !assert body.id exists
+
+  - name: fetch product
+    url: https://product-api.com/products/${{ create.response.body.id }}
+    assertions:
+      - !assert body.id equal ${{ create.response.body.id }}
+```
+
+As you can see on the highlighted line above, we can use values from the previous step in our assertions!
+
+## Available assertions
+
+Have a look at the [workflow reference](/cli/reference/workflow#assertions) page.
