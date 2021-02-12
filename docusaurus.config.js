@@ -5,7 +5,7 @@ module.exports = {
   tagline: 'Capter keeps your API running smoothly.',
   url: 'https://capter.io',
   baseUrl: '/',
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'https://capter.io/favicon.ico',
   organizationName: 'capterqa',
