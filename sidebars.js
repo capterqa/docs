@@ -11,6 +11,7 @@ module.exports = {
             'cli/guide/cli-getting-started',
             'cli/guide/cli-composing-requests',
             'cli/guide/cli-assertions',
+            'cli/guide/cli-handling-errors',
           ],
           Reference: [
             'cli/reference/cli-reference',

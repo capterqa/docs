@@ -1,0 +1,37 @@
+---
+id: cli-handling-errors
+title: Handling errors
+sidebar_label: Handling errors
+slug: /cli/guide/handling-errors
+---
+
+Sometimes your API will fail, that's just part of life as a developer. Hopefully Capter can help you catch it before a customer does!
+
+Even if a request fails, Capter will continue with the rest of the steps unless you tell it not to. This is because sometimes you want the API to return an error, and assert on that – like a failed login attemt or bad user input.
+
+## Handling unexpected errors
+
+The way to trigger a real error is to have an assertion fail.
+
+[more info coming soon]
+
+## Handling expected errors
+
+With Capter, you can make requests that fail, and then assert on the error you get back. This will be treated as a successful request:
+
+```yml {15}
+# ./capter/product-crud.yml
+
+name: product crud
+steps:
+  - name: create product
+    id: create
+    url: https://fake-api.capter.io/products
+    method: POST
+    body:
+      product_name: null
+    assertions:
+      - !assert status equal 422
+```
+
+[more info coming soon]
