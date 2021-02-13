@@ -63,7 +63,16 @@
 }
 
 .menu__list {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+}
+
+.menu__link {
+  line-height: 16px;
+  align-items: center;
+}
+
+.menu__link--sublist::after {
+  background-size: 20px 20px;
 }
 
 .navbar-sidebar__items .menu .menu__link {

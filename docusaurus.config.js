@@ -11,7 +11,6 @@ module.exports = {
   organizationName: 'capterqa',
   projectName: 'cli',
   themeConfig: {
-    sidebarCollapsible: false,
     prism: {
       theme: {
         ...theme,
@@ -58,7 +57,7 @@ module.exports = {
       items: [
         {
           to: '/cli/guide/installation',
-          label: 'Getting started',
+          label: 'Guide',
           position: 'left',
         },
         {
