@@ -80,12 +80,33 @@ module.exports = {
           title: 'Docs',
           items: [
             {
-              label: 'Style Guide',
-              to: 'docs/',
+              to: '/',
+              label: 'About',
             },
             {
-              label: 'Second ',
-              to: 'docs/doc2/',
+              to: '/cli/guide/installation',
+              label: 'Installation',
+            },
+            {
+              to: '/cli/guide/installation',
+              label: 'Getting started',
+            },
+          ],
+        },
+        {
+          title: 'Reference',
+          items: [
+            {
+              to: '/cli/reference/cli',
+              label: 'CLI',
+            },
+            {
+              to: '/cli/reference/workflow',
+              label: 'Workflow',
+            },
+            {
+              to: '/cli/reference/assertions',
+              label: 'Assertions',
             },
           ],
         },
