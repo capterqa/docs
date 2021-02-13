@@ -5,19 +5,39 @@ sidebar_label: Handling errors
 slug: /cli/guide/handling-errors
 ---
 
-Sometimes your API will fail, that's just part of life as a developer. Hopefully Capter can help you catch it before a customer does!
+Sometimes your API will fail, either during development or in a live environment. Capter can help you catch it before a customer does!
 
 Even if a request fails, Capter will continue with the rest of the steps unless you tell it not to. This is because sometimes you want the API to return an error, and assert on that – like a failed login attemt or bad user input.
 
 ## Handling unexpected errors
 
-The way to trigger a real error is to have an assertion fail.
+The way to trigger a real error is to have an assertion fail:
 
-[more info coming soon]
+```yml
+name: health check
+steps:
+  - name: check /health
+    url: https://fake-api.capter.io/api/health
+    assertions:
+      - status equal 400
+```
+
+![Demo](../../../src/assets/demos/error.gif)
+
+In the above example we expect the health endpoint to be secure, and return 400 if no authorization token is sent with the request. Capter will show what assertions failed, together with both the expected and the actual value you're asserting on.
+
+In the above example you can see that we are getting:
+
+```
+▶ health check → check /health → status
+  expected 400 to be 200
+```
+
+This is because the endpoint is not returning 400, it's returning an unexpected 200.
 
 ## Handling expected errors
 
-With Capter, you can make requests that fail, and then assert on the error you get back. This will be treated as a successful request:
+You can make requests that are designed fail, and then assert on the error you get back. This will be treated as a successful step:
 
 ```yml {15}
 # ./capter/product-crud.yml
@@ -32,6 +52,7 @@ steps:
       product_name: null
     assertions:
       - !assert status equal 422
+      - !!assert body isOk
 ```
 
-[more info coming soon]
+When we get an error back, we do our best to populate `status`, `body`, `headers` and `duration` so you can assert on those just like on a successful request.
