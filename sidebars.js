@@ -16,6 +16,7 @@ module.exports = {
           Reference: [
             'cli/reference/cli-reference',
             'cli/reference/workflow-reference',
+            'cli/reference/assertions-reference',
           ],
         },
       ],
