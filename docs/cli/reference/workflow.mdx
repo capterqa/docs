@@ -29,14 +29,14 @@ steps:
     body:
       name: ${{ env.product_name }}
     assertions:
-      - !assert status equal 201
-      - !assert body.name equal ${{ env.product_name }}
+      - !assert status to_equal 201
+      - !assert body.name to_equal ${{ env.product_name }}
 
   - name: fetch product
     url: ${{ env.URL }}/products/${{ create.response.body.id }}
     assertions:
-      - !assert status equal 200
-      - !assert body.name equal ${{ env.product_name }}
+      - !assert status to_equal 200
+      - !assert body.name to_equal ${{ env.product_name }}
 ```
 
 ## Root
@@ -152,7 +152,7 @@ steps:
       # use token from login response
       Authorization: bearer ${{ login.response.token }}
     assertions:
-      - !assert body.email equal ${{ env.email }}
+      - !assert body.email to_equal ${{ env.email }}
 ```
 
 ### `body`
@@ -176,9 +176,9 @@ A list of assertions that will run after the request gets a response:
 
 ```yml
 assertions:
-  - !assert status equals 200
-  - !assert duration isBelow 4000
-  - !assert body.email is filip@capter.io
+  - !assert status to_equal 200
+  - !assert duration to_be_below 4000
+  - !assert body.email to_equal filip@capter.io
 ```
 
 See the [Aassertion reference page](/cli/reference/assertions).

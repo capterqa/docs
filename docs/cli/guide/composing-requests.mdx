@@ -25,13 +25,13 @@ steps:
     # grab the base URL from an environment variable
     url: ${{ env.URL }}/api/products
     assertions:
-      - !assert status equal 200
-      - !assert body isArray
+      - !assert status to_equal 200
+      - !assert body to_be_array
 
   - name: fetch first product
     url: ${{ env.URL }}/api/posts/${{ products.response.body.0.id }}
     assertions:
-      - !assert body.id equal ${{ products.response.body.0.id }}
+      - !assert body.id to_equal ${{ products.response.body.0.id }}
 ```
 
 ### Environment variables
@@ -63,7 +63,7 @@ By adding a `id: products` to the first step, we now have access to its response
 `products.response.body.0.id` it the path to the `id` of the resource we want to fetch is in this step, and we use it both in the URL and then later in the assertion – making sure that fetching the resource `/api/posts/{id}` actually returns the correct resource:
 
 ```yml
-- !assert body.id equal ${{ products.response.body.0.id }}
+- !assert body.id to_equal ${{ products.response.body.0.id }}
 ```
 
 ## Available variables

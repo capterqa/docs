@@ -142,6 +142,6 @@ records:
   - delay: 196
     content: "\e[4m\e[2m\r\n.capter/health.yml\r\n\r\n\e[0m\e7\e[38;2;50;50;50m\e[48;5;11m RUNS \e[0m health check → check /health\r\n\r\n\e[1mWorkflows: \e[0m\e[2m0 of 1 total\e[0m\r\n\e[1mRequests: \e[0m\e[2m0 of 1 total\e[0m\r\n\e[1mTime: \e[0m\e[2m0.0 s\r\n\e[0m"
   - delay: 279
-    content: "\e[5F\e[J\e[38;2;50;50;50m\e[48;5;9m FAIL \e[0m health check → check /health\r\n\r\n    \e[38;5;9m✕\e[0m\e[2m status equal 400\e[0m\r\n\r\n\r\n\e[38;5;9m ▶ health check → check /health → status\e[0m\r\n\r\n   \e[2mexpected 200 to equal 400\e[0m\r\n\r\n\r\n\e[1mWorkflows: \e[0m\e[38;5;9m1 failed\e[0m\e[2m, 1 total\e[0m\r\n\e[1mRequests: \e[0m\e[38;5;9m1 failed\e[0m\e[2m, 1 total\e[0m\r\n\e[1mTime: \e[0m\e[2m0.3 s\r\n"
+    content: "\e[5F\e[J\e[38;2;50;50;50m\e[48;5;9m FAIL \e[0m health check → check /health\r\n\r\n    \e[38;5;9m✕\e[0m\e[2m status to_equal 400\e[0m\r\n\r\n\r\n\e[38;5;9m ▶ health check → check /health → status\e[0m\r\n\r\n   \e[2mexpected 200 to equal 400\e[0m\r\n\r\n\r\n\e[1mWorkflows: \e[0m\e[38;5;9m1 failed\e[0m\e[2m, 1 total\e[0m\r\n\e[1mRequests: \e[0m\e[38;5;9m1 failed\e[0m\e[2m, 1 total\e[0m\r\n\e[1mTime: \e[0m\e[2m0.3 s\r\n"
   - delay: 2400
     content: "\n➜ "

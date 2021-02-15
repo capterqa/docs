@@ -25,7 +25,7 @@ steps:
   - name: check /health
     url: https://fake-api.capter.io/api/health
     assertions:
-      - !assert status equal 200
+      - !assert status to_equal 200
 ```
 
 The example above is very small and doesn't do much. Have a look at the [get started guide](/cli/guide/getting-started) to learn how to add more steps, assertions and how to compose advanced requests.

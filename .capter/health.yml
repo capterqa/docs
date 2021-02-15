@@ -3,4 +3,4 @@ steps:
   - name: check /health
     url: https://fake-api.capter.io/api/health
     assertions:
-      - !assert status equal 200
+      - !assert status to_equal 200

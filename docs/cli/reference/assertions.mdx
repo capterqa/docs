@@ -5,4 +5,350 @@ sidebar_label: Assertions
 slug: /cli/reference/assertions
 ---
 
-Coming soon ✨
+## Overview
+
+Assertions in Capter are written in _plain English_:
+
+```yml {5}
+steps:
+  - name: fetch a products
+    url: ${{ env.URL }}/products/1
+    assertions:
+      - !assert body.name to_equal M1 MacBook Air
+```
+
+They are split in to two or three parts:
+
+- `body.name` is the path to the data in the response
+- `to_equal` is the test to run
+- `M1 MacBook Air` is the value we are expecting
+
+The third part can be omitted if the test is checking the type of the data, like if we did:
+
+```yml
+!assert body.name to_be_string
+```
+
+### What you can assert on
+
+There are four things you can assert on:
+
+- `status` - the HTTP status you get back
+- `body` - the response body
+- `headers` - the response headers
+- `duration` - how long it took to get a response back
+
+### Testing the opposite using the `!!` operator
+
+You can invert a test by adding an extra `!` at the start of the assertion string:
+
+```yml
+- !!assert status to_equal 500
+```
+
+The above test **will fail** if the status equals 500. This is equal to the `.not` extension you see in many other test frameworks.
+
+## Assertions
+
+### `to_be_above`
+
+Check if a number is more than another number.
+
+| `data`   | `value`  |                                        |
+| :------- | :------- | :------------------------------------- |
+| `number` | `number` | Passes if `value` is more than `data`. |
+
+#### Example:
+
+```yml
+!assert data.age to_be_above 30
+```
+
+### `to_be_array`
+
+Check if data is an array.
+
+| `data` | `value` |                               |
+| :----- | :------ | :---------------------------- |
+| `any`  |         | Passes if `data` is an array. |
+
+#### Example:
+
+```yml
+!assert data.products to_be_array
+```
+
+### `to_be_at_least`
+
+Check if a number is at the same or above another number.
+
+| `data`   | `value`  |                                                    |
+| :------- | :------- | :------------------------------------------------- |
+| `number` | `number` | Passes if `value` is the same or more than `data`. |
+
+#### Example:
+
+```yml
+!assert data.age to_be_at_least 30
+```
+
+### `to_be_at_most`
+
+Check if a number is at the same or less another number.
+
+| `data`   | `value`  |                                                    |
+| :------- | :------- | :------------------------------------------------- |
+| `number` | `number` | Passes if `value` is the same or less than `data`. |
+
+#### Example:
+
+```yml
+!assert data.age to_be_at_most 30
+```
+
+### `to_be_below`
+
+Check if a number is less another number.
+
+| `data`   | `value`  |                                        |
+| :------- | :------- | :------------------------------------- |
+| `number` | `number` | Passes if `value` is less than `data`. |
+
+#### Example:
+
+```yml
+!assert data.age to_be_below 30
+```
+
+### `to_be_boolean`
+
+Check if data is a boolean.
+
+| `data` | `value` |                                |
+| :----- | :------ | :----------------------------- |
+| `any`  |         | Passes if `data` is a boolean. |
+
+#### Example:
+
+```yml
+!assert data.products to_be_boolean
+```
+
+### `to_be_empty`
+
+Check if data is empty. See the table below what counts as empty.
+
+| `data`   | `value` |                                            |
+| :------- | :------ | :----------------------------------------- |
+| `array`  |         | Passes if `data` has a length of `0`.      |
+| `string` |         | Passes if `data` has `0` characters in it. |
+| `object` |         | Passes if `data` has `0` properties.       |
+
+#### Example:
+
+```yml
+!assert data.products to_be_empty
+```
+
+This can be very effective when inverted, to check that something _is not empty_:
+
+```yml
+!!assert data.products to_be_empty
+```
+
+### `to_be_false`
+
+Check if data is a boolean _and_ `false`.
+
+| `data` | `value` |                              |
+| :----- | :------ | :--------------------------- |
+| `any`  |         | Passes if `data` is `false`. |
+
+#### Example:
+
+```yml
+!assert data.is_admin to_be_false
+```
+
+### `to_be_null`
+
+Check if data is `null`.
+
+| `data` | `value` |                             |
+| :----- | :------ | :-------------------------- |
+| `any`  |         | Passes if `data` is `null`. |
+
+#### Example:
+
+```yml
+!assert data.errors to_be_null
+```
+
+:::note
+
+`is_null` will currently pass if the property is missing or undefined. In the future, it will only pass if the number is explicitly `null`.
+
+:::
+
+### `to_be_number`
+
+Check if data is a number.
+
+| `data` | `value` |                               |
+| :----- | :------ | :---------------------------- |
+| `any`  |         | Passes if `data` is a number. |
+
+#### Example:
+
+```yml
+!assert data.price to_be_number
+```
+
+### `to_be_object`
+
+Check if data is an object.
+
+| `data` | `value` |                                |
+| :----- | :------ | :----------------------------- |
+| `any`  |         | Passes if `data` is an object. |
+
+#### Example:
+
+```yml
+!assert data.user to_be_object
+```
+
+### `to_be_string`
+
+Check if data is a string.
+
+| `data` | `value` |                               |
+| :----- | :------ | :---------------------------- |
+| `any`  |         | Passes if `data` is a string. |
+
+#### Example:
+
+```yml
+!assert data.email to_be_string
+```
+
+### `to_be_true`
+
+Check if data is a boolean _and_ `true`.
+
+| `data` | `value` |                             |
+| :----- | :------ | :-------------------------- |
+| `any`  |         | Passes if `data` is `true`. |
+
+#### Example:
+
+```yml
+!assert data.is_admin to_be_true
+```
+
+### `to_be_undefined`
+
+Check if data is `undefined`.
+
+| `data` | `value` |                                  |
+| :----- | :------ | :------------------------------- |
+| `any`  |         | Passes if `data` is `undefined`. |
+
+#### Example:
+
+```yml
+!assert data.errors to_be_undefined
+```
+
+:::note
+
+`to_be_undefined` will currently pass if the property is `null`. In the future, it will only pass if the property is missing or `undefined`.
+
+:::
+
+### `to_contain`
+
+Check if data contains the value.
+
+| `data`   | `value` |                                                                                                                                                                                                                     |
+| :------- | :------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `array`  |         | Passes if `data` contains the `value`.                                                                                                                                                                              |
+| `string` |         | Passes if `data` contains the substring `value`.                                                                                                                                                                    |
+| `any`    |         | Passes if `data` includes `value`. This test is best used with an array or a string, but works with any type of data. If you have a large object and want to look for a specific term, `to_contain` is a good pick. |
+
+#### Example:
+
+```yml
+!assert data.products to_contain M1 MacBook Air
+!assert data.names to_contain Steve
+!assert data.name to_contain Jobs
+```
+
+### `to_equal`
+
+Check if data equals value.
+
+| `data` | `value` |                                  |
+| :----- | :------ | :------------------------------- |
+| `any`  | `any`   | Passes if `data` equals `value`. |
+
+#### Example:
+
+```yml
+!assert data.name to_equal Steve
+```
+
+:::note
+
+This cannot be used to compare two objects or arrays if the keys or values are in different locations. There is a `to_match` assertion in the roadmap that will do that. You can track the [issue on GitHub](https://github.com/capterqa/cli/issues/15).
+
+:::
+
+### `to_exist`
+
+Check if data has a value.
+
+| `data` | `value` |                               |
+| :----- | :------ | :---------------------------- |
+| `any`  |         | Passes if `data` has a value. |
+
+#### Example:
+
+```yml
+!assert data.body to_exist
+```
+
+:::note
+
+`to_exist` will currently pass if the property is not `null`. In the future, it will fail if the value is missing or `undefined`, **and pass it it's `null`**.
+
+:::
+
+### `to_have_length`
+
+Check if data has length. See the table below how length is calculated.
+
+| `data`   | `value`  |                                                          |
+| :------- | :------- | :------------------------------------------------------- |
+| `array`  | `number` | Passes if `data` has a length of `value`.                |
+| `string` | `number` | Passes if `data`'s characters has the length of `value`. |
+
+#### Example:
+
+```yml
+!assert data.products to_have_length 5
+```
+
+### `to_match`
+
+Searches data for the value using regex and passes if it gets a hit.
+
+| `data` | `value` |                                            |
+| :----- | :------ | :----------------------------------------- |
+| `any`  | `any`   | Passes if `data` gets a match for `value`. |
+
+#### Example:
+
+```yml
+!assert data.products to_match M1 MacBook Air
+```

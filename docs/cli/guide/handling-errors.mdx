@@ -19,7 +19,7 @@ steps:
   - name: check /health
     url: https://fake-api.capter.io/api/health
     assertions:
-      - status equal 400
+      - status to_equal 400
 ```
 
 ![Demo](../../../src/assets/demos/error.gif)
@@ -51,8 +51,8 @@ steps:
     body:
       product_name: null
     assertions:
-      - !assert status equal 422
-      - !!assert body isOk
+      - !assert status to_equal 422
+      - !!assert body to_exist
 ```
 
 When we get an error back, we do our best to populate `status`, `body`, `headers` and `duration` so you can assert on those just like on a successful request.
