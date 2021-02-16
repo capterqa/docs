@@ -5,13 +5,47 @@ sidebar_label: Installation
 slug: /cli/guide/installation
 ---
 
-:::note
+## NPM
 
-You can currently only install Capter [manually](#manual-installation) or through [Cargo](#cargo). More ways are coming soon!
+You can install the Capter CLI through NPM or Yarn:
 
-:::
+```sh
+# npm
+npm i @capterqa/cli --save-dev
 
-### Manual installation
+# yarn
+yarn add @capterqa/cli --dev
+```
+
+### Usage
+
+You should now be able to run the CLI:
+
+```sh
+# npm
+npm run capter
+
+# yarn
+yarn capter
+```
+
+### With `npx`
+
+Another way to use Capter without actually installing it is running it through [`npx`](https://blog.npmjs.org/post/162869356040/introducing-npx-an-npm-package-runner):
+
+```sh
+npx capter
+```
+
+## Cargo
+
+```sh
+cargo install capter --vers [VERSION]
+```
+
+Head over to [crates.io](https://crates.io/crates/capter) and check for the latest version number.
+
+## Manual installation
 
 1. Go to [GitHub Releases](https://github.com/capterqa/cli/releases) on the Capter CLI repo
 2. Expand _Assets_ on a release and download the binary for your OS
@@ -23,11 +57,3 @@ export PATH=$PATH:/capter/bin/location
 ```
 
 > You might have to run `chmod +x capter` to get the correct permssions to run it.
-
-### Cargo
-
-```sh
-cargo install capter --vers [VERSION]
-```
-
-Head over to [crates.io](https://crates.io/crates/capter) and check for the latest version number.
