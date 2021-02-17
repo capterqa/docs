@@ -14,7 +14,7 @@ steps:
   - name: fetch a products
     url: ${{ env.URL }}/products/1
     assertions:
-      - !assert body.name to_equal M1 MacBook Air
+      - !expect body.name to_equal M1 MacBook Air
 ```
 
 They are split in to two or three parts:
@@ -26,7 +26,7 @@ They are split in to two or three parts:
 The third part can be omitted if the test is checking the type of the data, like if we did:
 
 ```yml
-!assert body.name to_be_string
+!expect body.name to_be_string
 ```
 
 ### What you can assert on
@@ -43,7 +43,7 @@ There are four things you can assert on:
 You can invert a test by adding an extra `!` at the start of the assertion string:
 
 ```yml
-- !!assert status to_equal 500
+- !!expect status to_equal 500
 ```
 
 The above test **will fail** if the status equals 500. This is equal to the `.not` extension you see in many other test frameworks.
@@ -61,7 +61,7 @@ Check if a number is more than another number.
 #### Example:
 
 ```yml
-!assert data.age to_be_above 30
+!expect data.age to_be_above 30
 ```
 
 ### `to_be_array`
@@ -75,7 +75,7 @@ Check if data is an array.
 #### Example:
 
 ```yml
-!assert data.products to_be_array
+!expect data.products to_be_array
 ```
 
 ### `to_be_at_least`
@@ -89,7 +89,7 @@ Check if a number is at the same or above another number.
 #### Example:
 
 ```yml
-!assert data.age to_be_at_least 30
+!expect data.age to_be_at_least 30
 ```
 
 ### `to_be_at_most`
@@ -103,7 +103,7 @@ Check if a number is at the same or less another number.
 #### Example:
 
 ```yml
-!assert data.age to_be_at_most 30
+!expect data.age to_be_at_most 30
 ```
 
 ### `to_be_below`
@@ -117,7 +117,7 @@ Check if a number is less another number.
 #### Example:
 
 ```yml
-!assert data.age to_be_below 30
+!expect data.age to_be_below 30
 ```
 
 ### `to_be_boolean`
@@ -131,7 +131,7 @@ Check if data is a boolean.
 #### Example:
 
 ```yml
-!assert data.products to_be_boolean
+!expect data.products to_be_boolean
 ```
 
 ### `to_be_empty`
@@ -147,13 +147,13 @@ Check if data is empty. See the table below what counts as empty.
 #### Example:
 
 ```yml
-!assert data.products to_be_empty
+!expect data.products to_be_empty
 ```
 
 This can be very effective when inverted, to check that something _is not empty_:
 
 ```yml
-!!assert data.products to_be_empty
+!!expect data.products to_be_empty
 ```
 
 ### `to_be_false`
@@ -167,7 +167,7 @@ Check if data is a boolean _and_ `false`.
 #### Example:
 
 ```yml
-!assert data.is_admin to_be_false
+!expect data.is_admin to_be_false
 ```
 
 ### `to_be_null`
@@ -181,7 +181,7 @@ Check if data is `null`.
 #### Example:
 
 ```yml
-!assert data.errors to_be_null
+!expect data.errors to_be_null
 ```
 
 :::note
@@ -201,7 +201,7 @@ Check if data is a number.
 #### Example:
 
 ```yml
-!assert data.price to_be_number
+!expect data.price to_be_number
 ```
 
 ### `to_be_object`
@@ -215,7 +215,7 @@ Check if data is an object.
 #### Example:
 
 ```yml
-!assert data.user to_be_object
+!expect data.user to_be_object
 ```
 
 ### `to_be_string`
@@ -229,7 +229,7 @@ Check if data is a string.
 #### Example:
 
 ```yml
-!assert data.email to_be_string
+!expect data.email to_be_string
 ```
 
 ### `to_be_true`
@@ -243,7 +243,7 @@ Check if data is a boolean _and_ `true`.
 #### Example:
 
 ```yml
-!assert data.is_admin to_be_true
+!expect data.is_admin to_be_true
 ```
 
 ### `to_be_undefined`
@@ -257,7 +257,7 @@ Check if data is `undefined`.
 #### Example:
 
 ```yml
-!assert data.errors to_be_undefined
+!expect data.errors to_be_undefined
 ```
 
 :::note
@@ -279,9 +279,9 @@ Check if data contains the value.
 #### Example:
 
 ```yml
-!assert data.products to_contain M1 MacBook Air
-!assert data.names to_contain Steve
-!assert data.name to_contain Jobs
+!expect data.products to_contain M1 MacBook Air
+!expect data.names to_contain Steve
+!expect data.name to_contain Jobs
 ```
 
 ### `to_equal`
@@ -295,7 +295,7 @@ Check if data equals value.
 #### Example:
 
 ```yml
-!assert data.name to_equal Steve
+!expect data.name to_equal Steve
 ```
 
 :::note
@@ -315,7 +315,7 @@ Check if data has a value.
 #### Example:
 
 ```yml
-!assert data.body to_exist
+!expect data.body to_exist
 ```
 
 :::note
@@ -336,7 +336,7 @@ Check if data has length. See the table below how length is calculated.
 #### Example:
 
 ```yml
-!assert data.products to_have_length 5
+!expect data.products to_have_length 5
 ```
 
 ### `to_match`
@@ -350,5 +350,5 @@ Searches data for the value using regex and passes if it gets a hit.
 #### Example:
 
 ```yml
-!assert data.products to_match M1 MacBook Air
+!expect data.products to_match M1 MacBook Air
 ```

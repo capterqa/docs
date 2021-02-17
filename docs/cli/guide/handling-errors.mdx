@@ -51,8 +51,8 @@ steps:
     body:
       product_name: null
     assertions:
-      - !assert status to_equal 422
-      - !!assert body to_exist
+      - !expect status to_equal 422
+      - !!expect body to_exist
 ```
 
 When we get an error back, we do our best to populate `status`, `body`, `headers` and `duration` so you can assert on those just like on a successful request.

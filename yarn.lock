@@ -1077,10 +1077,10 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
-"@capterqa/cli@1.0.0-alpha.14":
-  version "1.0.0-alpha.14"
-  resolved "https://registry.yarnpkg.com/@capterqa/cli/-/cli-1.0.0-alpha.14.tgz#5191d3217314cd02500c4166768e0265f9b93431"
-  integrity sha512-ygvL5IXLbiJ9G6hO9+is77z2jfWo8guiYkuIg6NpPBMTh/duFmdpSWEtHEzxvX55x9qA8BYN38DZV7gYCBcFJg==
+"@capterqa/cli@^1.0.0-alpha.15":
+  version "1.0.0-alpha.15"
+  resolved "https://registry.yarnpkg.com/@capterqa/cli/-/cli-1.0.0-alpha.15.tgz#a2ae011cd2452c68c47a39e68d416956cb7cdb66"
+  integrity sha512-ufeg9xhFO3++aNGSgt/ahybDWQEWqdsBIjZbnwGnXFDXAygayVsExNx35IrNAcqHuhttVtGQUae768gUDjUd+Q==
   dependencies:
     axios "^0.21.1"
     console.table "^0.10.0"

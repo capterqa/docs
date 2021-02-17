@@ -21,8 +21,8 @@ steps:
   - name: fetch all products
     url: https://fake-api.capter.io/api/products
     assertions:
-      - !assert status to_equal 200
-      - !assert body to_be_array
+      - !expect status to_equal 200
+      - !expect body to_be_array
 ```
 
 In the above example we assert that the status equals 200 and that the body we get back is an array.
@@ -41,7 +41,7 @@ There are four things you can assert on:
 You can invert a test by adding an extra `!` at the start of the assertion string:
 
 ```yml
-- !!assert status to_equal 500
+- !!expect status to_equal 500
 ```
 
 The above test **will fail** if the status equals 500. This is equal to the `.not` extension you see in many other test frameworks.
@@ -67,12 +67,12 @@ steps:
     url: https://fake-api.capter.io/products
     method: POST
     assertions:
-      - !assert body.id to_exist
+      - !expect body.id to_exist
 
   - name: fetch product
     url: https://product-api.com/products/${{ create.response.body.id }}
     assertions:
-      - !assert body.id to_equal ${{ create.response.body.id }}
+      - !expect body.id to_equal ${{ create.response.body.id }}
 ```
 
 As you can see on the highlighted line above, we can use values from the previous step in our assertions!
