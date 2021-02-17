@@ -32,12 +32,33 @@ You can add `--help` to any command to see the available options and arguments.
 
 Running `capter test` will run any available workflow that the CLI can find in your project.
 
+```console
+USAGE:
+    capter test [FLAGS] [OPTIONS] [INPUT]
+
+FLAGS:
+    -d, --debug
+        --dry-run     skip posting the run to the webhook
+    -h, --help        Prints help information
+        --skip-git    don't pass any git information to the webhook
+    -V, --version     Prints version information
+
+OPTIONS:
+        --timeout <SECONDS>    how long to wait for a connection
+    -t, --token <TOKEN>        pass a token with the webhook request
+    -w, --webhook <URL>        post the run to a url after completion
+
+ARGS:
+    <INPUT>    Glob pattern where to look for tests [default: {.capter,capter}/**/*.yml]
+```
+
 #### Options
 
-| Option          | description                                                                                                                                                                                                                                                       |
-| :-------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--token`, `-t` | If you are using the capter.io service, pass in your project token. This will automatically send the run report to Capter. If you post to a custom webhook, this token will be passed in the query like `?token={token}` so you can use it to authorize the call. |
-| `--webhook`     | The CLI will make a POST request with the run report to this URL. If you pass in a `--token` but no webhook, it will use the capter.io webhook.                                                                                                                   |
+| Option            | description                                                                                                                                                                                                                                                       |
+| :---------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--token`, `-t`   | If you are using the capter.io service, pass in your project token. This will automatically send the run report to Capter. If you post to a custom webhook, this token will be passed in the query like `?token={token}` so you can use it to authorize the call. |
+| `--webhook`, `-w` | The CLI will make a POST request with the run report to this URL. If you pass in a `--token` but no webhook, it will use the capter.io webhook.                                                                                                                   |
+| `--timeout`       | Set the request timeout in seconds.                                                                                                                                                                                                                               |
 
 #### Flags
 
