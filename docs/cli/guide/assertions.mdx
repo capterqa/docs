@@ -64,8 +64,7 @@ name: product crud
 steps:
   - name: create product
     id: create
-    url: https://fake-api.capter.io/products
-    method: POST
+    url: POST https://fake-api.capter.io/products
     assertions:
       - !expect body.id to_exist
 

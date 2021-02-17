@@ -24,8 +24,7 @@ headers:
 steps:
   - name: create product
     id: create
-    url: ${{ env.URL }}/products
-    method: POST
+    url: POST ${{ env.URL }}/products
     body:
       name: ${{ env.product_name }}
     assertions:
@@ -108,6 +107,12 @@ The method used when making the request.
 
 Defaults to `GET`.
 
+The recommended way of setting the method is to directly add it in the url:
+
+```yml
+url: POST ${{ env.URL }}/users
+```
+
 ### `query`
 
 Adds a query to the url:
@@ -140,8 +145,7 @@ name: login
 steps:
   - name: login
     id: login
-    url: ${{ env.url }}/login
-    method: POST
+    url: POST ${{ env.url }}/login
     body:
       email: ${{ env.email }}
       password: ${{ env.password }}
