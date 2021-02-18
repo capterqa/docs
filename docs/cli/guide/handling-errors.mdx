@@ -55,3 +55,48 @@ steps:
 ```
 
 When we get an error back, we do our best to populate `status`, `body`, `headers` and `duration` so you can assert on those just like on a successful request.
+
+## Logs
+
+To make it easier to debug, Capter will log failed workflows to `.capter/logs`. These logs includes the requests and responses. If the output from the CLI doesn't give you all the info you need, take a look at these logs!
+
+```log
+health check [.capter/health.yml]
+
+Steps:
+
+  Name:
+    check /health
+
+  Passed:
+    false
+
+  Created at:
+    2021-02-18 08:33:50.326494 UTC
+
+  URL:
+    GET https://fake-api.capter.io/api/health
+
+  Query:
+    null
+
+  Headers:
+    null
+
+  Body:
+    null
+
+  Response:
+
+    Status:
+      500
+
+    Status text:
+      "Internal Server Error"
+
+    Headers:
+      null
+
+    Body:
+      null
+```
