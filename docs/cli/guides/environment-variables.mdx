@@ -1,0 +1,51 @@
+---
+id: guides-environment-variables
+title: Environment variables
+sidebar_label: Environment variables
+slug: /cli/guides/environment-variables
+---
+
+Using environment variables is a powerful way of running the same tests in different environments.
+
+## `.env` file
+
+You can add environment variables in your `.env` file, and Capter will automatically read it.
+
+```makefile
+# testing locally
+URL="http://localhost:3000"
+```
+
+```makefile
+# testing prod
+URL="https://my-prod-api.com"
+```
+
+## Inline
+
+You can also run the CLI with the environment variables inline in the command:
+
+```console
+URL=http://localhost:3000 capter test
+```
+
+## Using the variables
+
+To use the environment variable, you can use the template tag syntax and the `env` context:
+
+```yaml {7}
+# .capter/products.yml
+
+name: products
+steps:
+  - name: fetch all products
+    # grab the base URL from an environment variable
+    url: ${{ env.URL }}/api/products
+    assertions:
+      - !expect status to_equal 200
+      - !expect body to_be_array
+```
+
+## Variables in CI
+
+When you run the CLI in a CI environment, all environment variables provided by that CI will be available in the `env` scope. For example, if you use GitHub Actions, [this is what you can do](https://docs.github.com/en/actions/reference/environment-variables).
