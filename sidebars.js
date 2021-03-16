@@ -7,12 +7,12 @@ module.exports = {
       items: [
         'docs-index',
         {
-          Guide: [
-            'cli/guide/cli-installation',
-            'cli/guide/cli-getting-started',
-            'cli/guide/cli-composing-requests',
-            'cli/guide/cli-assertions',
-            'cli/guide/cli-handling-errors',
+          'Getting started': [
+            'cli/getting-started/cli-installation',
+            'cli/getting-started/cli-workflows',
+            'cli/getting-started/cli-composing-requests',
+            'cli/getting-started/cli-assertions',
+            'cli/getting-started/cli-handling-errors',
           ],
           Reference: [
             'cli/reference/cli-reference',

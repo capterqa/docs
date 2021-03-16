@@ -56,8 +56,8 @@ module.exports = {
       },
       items: [
         {
-          to: '/cli/guide/installation',
-          label: 'Guide',
+          to: '/cli/getting-started/installation',
+          label: 'Getting started',
           position: 'left',
         },
         {
@@ -83,11 +83,11 @@ module.exports = {
               label: 'About',
             },
             {
-              to: '/cli/guide/installation',
+              to: '/cli/getting-started/installation',
               label: 'Installation',
             },
             {
-              to: '/cli/guide/installation',
+              to: '/cli/getting-started/workflows',
               label: 'Getting started',
             },
           ],
