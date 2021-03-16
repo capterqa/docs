@@ -32,6 +32,6 @@
     ]
   },
   "devDependencies": {
-    "@capterqa/cli": "^1.0.0-alpha.15"
+    "@capterqa/cli": "^1.0.0-alpha.27"
   }
 }
