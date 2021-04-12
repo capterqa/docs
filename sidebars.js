@@ -14,7 +14,10 @@ module.exports = {
             'cli/getting-started/cli-assertions',
             'cli/getting-started/cli-handling-errors',
           ],
-          Guides: ['cli/guides/guides-environment-variables'],
+          Guides: [
+            'cli/guides/guides-environment-variables',
+            'cli/guides/guides-masking',
+          ],
           Reference: [
             'cli/reference/cli-reference',
             'cli/reference/workflow-reference',

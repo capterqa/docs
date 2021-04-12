@@ -1,0 +1,50 @@
+---
+id: guides-masking
+title: Masking
+sidebar_label: Masking
+slug: /cli/guides/masking
+---
+
+You can mask both request variables and response data. This is useful if you have secret data like passwords or tokens, or personal data in the responses you want to filter out.
+
+The data is masked in the CLI and never passed to the webhook in its raw format, meaning that the only one with access to your secret data is you.
+
+## Masking request variables
+
+You can prefix anything you put in `${{ }}` with `mask` to mask it.
+
+```yml {5}
+# ./capter/user.yml
+
+name: fetch user
+headers:
+  Authorization: bearer ${{ mask env.JWT }}
+```
+
+This will result in `Authorization: bearer ****` in the UI and on capter.io.
+
+## Masking response data
+
+If you need to mask properties in the response you can add the `mask` flag in the step options.
+
+```yml {7-10}
+# ./capter/user.yml
+
+name: user
+steps:
+  - name: fetch current user
+    url: GET ${{ env.URL }}/api/me
+    options:
+      mask:
+        - name
+        - email
+```
+
+The response will now look something like:
+
+```json
+{
+  "name": "****",
+  "email": "****"
+}
+```
